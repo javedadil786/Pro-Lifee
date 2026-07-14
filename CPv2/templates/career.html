@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PRO LIFE — Career Hub</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <main class="career-card comic-panel">
+
+        <div class="career-header">
+
+            <div>
+
+                <div class="comic-kicker">
+
+                    {% if player.retired %}
+                        Career Complete
+                    {% else %}
+                        PRO LIFE Career Hub
+                    {% endif %}
+
+                </div>
+
+                <h1>
+                    {{ player.name }}
+                </h1>
+
+                <p class="subtitle">
+                    {{ player.position }}
+                    •
+                    {{ player.nationality }}
+                </p>
+
+            </div>
+
+            <div class="overall-circle">
+
+                <span class="overall-number">
+                    {{ player.overall }}
+                </span>
+
+                <span class="overall-label">
+                    OVR
+                </span>
+
+            </div>
+
+        </div>
+
+        {% if player.retired %}
+
+            <h2>
+                Retirement Summary
+            </h2>
+
+            <div class="career-grid">
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Retirement Age
+                    </span>
+
+                    <strong>
+                        {{ player.age }}
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Final Club
+                    </span>
+
+                    <strong>
+                        {{ player.club }}
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Peak Overall
+                    </span>
+
+                    <strong>
+                        {{ player.peak_overall }}
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Career Status
+                    </span>
+
+                    <strong>
+                        {{ summary.career_status }}
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+                    <span>Seasons</span>
+
+                    <strong>
+                        {{ player.career_seasons }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Matches</span>
+
+                    <strong>
+                        {{ player.career_matches }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Average Overall</span>
+
+                    <strong>
+                        {{ summary.average_overall }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Average Rating</span>
+
+                    <strong>
+                        {{ summary.average_rating }}
+                    </strong>
+                </div>
+
+                {% if player.position == "Goalkeeper" %}
+
+                    <div class="stat-box">
+                        <span>Saves</span>
+
+                        <strong>
+                            {{ player.career_saves }}
+                        </strong>
+                    </div>
+
+                    <div class="stat-box">
+                        <span>Clean Sheets</span>
+
+                        <strong>
+                            {{ player.career_clean_sheets }}
+                        </strong>
+                    </div>
+
+                {% else %}
+
+                    <div class="stat-box">
+                        <span>Goals</span>
+
+                        <strong>
+                            {{ player.career_goals }}
+                        </strong>
+                    </div>
+
+                    <div class="stat-box">
+                        <span>Assists</span>
+
+                        <strong>
+                            {{ player.career_assists }}
+                        </strong>
+                    </div>
+
+                {% endif %}
+
+                <div class="stat-box">
+                    <span>Total Trophies</span>
+
+                    <strong>
+                        {{ summary.total_trophies }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Biggest Transfer</span>
+
+                    <strong>
+                        £{{ player.biggest_transfer_fee }}m
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="info-box">
+
+                <span class="info-label">
+                    Clubs Played For
+                </span>
+
+                <strong>
+                    {{ summary.clubs_played }}
+                </strong>
+
+            </div>
+
+            <div class="menu-buttons">
+
+                <a
+                    class="menu-button"
+                    href="{{ url_for('statistics_page') }}"
+                >
+                    View Full Statistics
+                </a>
+
+                <a
+                    class="menu-button primary"
+                    href="{{ url_for('create_player_page') }}"
+                >
+                    Start New Career
+                </a>
+
+                <a
+                    class="menu-button"
+                    href="{{ url_for('home') }}"
+                >
+                    Return Home
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <div class="career-grid">
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Club
+                    </span>
+
+                    <strong>
+                        {{ player.club }}
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Age
+                    </span>
+
+                    <strong>
+                        {{ player.age }}
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Season
+                    </span>
+
+                    <strong>
+                        {{ player.season }}
+                    </strong>
+                </div>
+
+                <div class="info-box">
+                    <span class="info-label">
+                        Potential
+                    </span>
+
+                    <strong>
+                        {{ player.potential }}
+                    </strong>
+                </div>
+
+            </div>
+
+            <h2>
+                Player Attributes
+            </h2>
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+                    <span>Pace</span>
+
+                    <strong>
+                        {{ player.pace }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Shooting</span>
+
+                    <strong>
+                        {{ player.shooting }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Passing</span>
+
+                    <strong>
+                        {{ player.passing }}
+                    </strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Defending</span>
+
+                    <strong>
+                        {{ player.defending }}
+                    </strong>
+                </div>
+
+            </div>
+
+            {% if player.career_seasons > 0 %}
+
+                <h2>
+                    Latest Season
+                </h2>
+
+                <div class="stats-grid">
+
+                    <div class="stat-box">
+                        <span>Matches</span>
+
+                        <strong>
+                            {{ player.season_matches }}
+                        </strong>
+                    </div>
+
+                    {% if player.position == "Goalkeeper" %}
+
+                        <div class="stat-box">
+                            <span>Saves</span>
+
+                            <strong>
+                                {{ player.season_saves }}
+                            </strong>
+                        </div>
+
+                        <div class="stat-box">
+                            <span>Clean Sheets</span>
+
+                            <strong>
+                                {{ player.season_clean_sheets }}
+                            </strong>
+                        </div>
+
+                    {% else %}
+
+                        <div class="stat-box">
+                            <span>Goals</span>
+
+                            <strong>
+                                {{ player.season_goals }}
+                            </strong>
+                        </div>
+
+                        <div class="stat-box">
+                            <span>Assists</span>
+
+                            <strong>
+                                {{ player.season_assists }}
+                            </strong>
+                        </div>
+
+                    {% endif %}
+
+                    <div class="stat-box">
+                        <span>Rating</span>
+
+                        <strong>
+                            {{ player.season_rating }}
+                        </strong>
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            {% if player.injured %}
+
+                <div class="injury-box">
+
+                    {{ player.injury_name }}
+
+                    —
+
+                    {{ player.injury_games }}
+                    games remaining
+
+                </div>
+
+            {% endif %}
+
+            {% if transfer_offers %}
+
+                <h2>
+                    Transfer Offers
+                </h2>
+
+                <div class="stats-grid">
+
+                    {% for offer in transfer_offers %}
+
+                        <div class="stat-box">
+
+                            <span>
+                                {{ offer.league }}
+                            </span>
+
+                            <strong>
+                                {{ offer.club_name }}
+                            </strong>
+
+                            <p>
+
+                                {% if offer.fee == 0 %}
+
+                                    First professional contract
+
+                                {% else %}
+
+                                    £{{ offer.fee }}m
+                                    transfer fee
+
+                                {% endif %}
+
+                            </p>
+
+                            <p>
+                                {{ offer.contract_years }}
+                                years
+                                •
+                                £{{ "{:,}".format(offer.weekly_wage) }}/week
+                            </p>
+
+                            <p>
+                                {{ offer.squad_role }}
+                            </p>
+
+                            <form
+                                action="{{ url_for('accept_transfer', offer_index=loop.index0) }}"
+                                method="POST"
+                            >
+
+                                <button
+                                    class="menu-button primary"
+                                    type="submit"
+                                >
+                                    Accept Offer
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <form
+                    action="{{ url_for('reject_transfers') }}"
+                    method="POST"
+                >
+
+                    <button
+                        class="menu-button danger-button"
+                        type="submit"
+                    >
+                        Reject All Offers
+                    </button>
+
+                </form>
+
+            {% endif %}
+
+            <div class="menu-buttons">
+
+                <form
+                    action="{{ url_for('play_next_season') }}"
+                    method="POST"
+                >
+
+                    <button
+                        class="menu-button primary comic-burst"
+                        type="submit"
+                        {% if transfer_offers %}
+                            disabled
+                        {% endif %}
+                    >
+                        Play Next Season
+                    </button>
+
+                </form>
+
+                <form
+                    action="{{ url_for('simulate_full_career') }}"
+                    method="POST"
+                    onsubmit="
+                        return confirm(
+                            'Simulate the entire remaining career?'
+                        );
+                    "
+                >
+
+                    <button
+                        class="menu-button"
+                        type="submit"
+                    >
+                        Simulate Full Career
+                    </button>
+
+                </form>
+
+                <form
+                    action="{{ url_for('save_current_career') }}"
+                    method="POST"
+                >
+
+                    <button
+                        class="menu-button"
+                        type="submit"
+                    >
+                        Save Career
+                    </button>
+
+                </form>
+
+                <a
+                    class="menu-button"
+                    href="{{ url_for('statistics_page') }}"
+                >
+                    View Statistics
+                </a>
+
+                <form
+                    action="{{ url_for('retire_player') }}"
+                    method="POST"
+                    onsubmit="
+                        return confirm(
+                            'Are you sure you want to retire?'
+                        );
+                    "
+                >
+
+                    <button
+                        class="menu-button danger-button"
+                        type="submit"
+                    >
+                        Retire
+                    </button>
+
+                </form>
+
+                <a
+                    class="menu-button"
+                    href="{{ url_for('home') }}"
+                >
+                    Return Home
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+<footer class="site-footer">
+    <p>
+        Join the PRO LIFE community
+    </p>
+
+    <a
+        class="discord-link"
+        href="https://discord.gg/knrfNj7t9c"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Join our Discord
+    </a>
+</footer>
+</body>
+
+</html>

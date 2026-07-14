@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PRO LIFE — Player Statistics</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <main class="career-card comic-panel">
+
+        <div class="comic-kicker">
+            PRO LIFE
+        </div>
+
+        <h1>
+            Player Statistics
+        </h1>
+
+        <p class="subtitle">
+            {{ player.name }}
+            •
+            {{ player.position }}
+            •
+            {{ player.club }}
+        </p>
+
+        <h2>
+            Club Career
+        </h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <span>Matches</span>
+
+                <strong>
+                    {{ player.career_matches }}
+                </strong>
+
+            </div>
+
+            {% if player.position == "Goalkeeper" %}
+
+                <div class="stat-box">
+
+                    <span>Saves</span>
+
+                    <strong>
+                        {{ player.career_saves }}
+                    </strong>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <span>Clean Sheets</span>
+
+                    <strong>
+                        {{ player.career_clean_sheets }}
+                    </strong>
+
+                </div>
+
+            {% else %}
+
+                <div class="stat-box">
+
+                    <span>Goals</span>
+
+                    <strong>
+                        {{ player.career_goals }}
+                    </strong>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <span>Assists</span>
+
+                    <strong>
+                        {{ player.career_assists }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+            <div class="stat-box">
+
+                <span>Peak Overall</span>
+
+                <strong>
+                    {{ player.peak_overall }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Seasons Played</span>
+
+                <strong>
+                    {{ player.career_seasons }}
+                </strong>
+
+            </div>
+
+        </div>
+
+        <h2>
+            International Career
+        </h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <span>Caps</span>
+
+                <strong>
+                    {{ player.international_caps }}
+                </strong>
+
+            </div>
+
+            {% if player.position == "Goalkeeper" %}
+
+                <div class="stat-box">
+
+                    <span>International Saves</span>
+
+                    <strong>
+                        {{ player.international_saves }}
+                    </strong>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <span>International Clean Sheets</span>
+
+                    <strong>
+                        {{ player.international_clean_sheets }}
+                    </strong>
+
+                </div>
+
+            {% else %}
+
+                <div class="stat-box">
+
+                    <span>International Goals</span>
+
+                    <strong>
+                        {{ player.international_goals }}
+                    </strong>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <span>International Assists</span>
+
+                    <strong>
+                        {{ player.international_assists }}
+                    </strong>
+
+                </div>
+
+            {% endif %}
+
+            <div class="stat-box">
+
+                <span>World Cup Appearances</span>
+
+                <strong>
+                    {{ player.world_cup_appearances }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Euros Appearances</span>
+
+                <strong>
+                    {{ player.euros_appearances }}
+                </strong>
+
+            </div>
+
+        </div>
+
+        <h2>
+            Honours
+        </h2>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+
+                <span>League Titles</span>
+
+                <strong>
+                    {{ player.league_titles }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Domestic Cups</span>
+
+                <strong>
+                    {{ player.domestic_cups }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Champions Leagues</span>
+
+                <strong>
+                    {{ player.champions_leagues }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>World Cups</span>
+
+                <strong>
+                    {{ player.world_cups }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Euros</span>
+
+                <strong>
+                    {{ player.euros }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Ballon d'Ors</span>
+
+                <strong>
+                    {{ player.ballon_dors }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Golden Boots</span>
+
+                <strong>
+                    {{ player.golden_boots }}
+                </strong>
+
+            </div>
+
+            <div class="stat-box">
+
+                <span>Team of the Seasons</span>
+
+                <strong>
+                    {{ player.team_of_seasons }}
+                </strong>
+
+            </div>
+
+        </div>
+
+        <h2>
+            Transfer History
+        </h2>
+
+        <div class="info-box">
+
+            <span class="info-label">
+                Clubs Played For
+            </span>
+
+            <strong>
+                {{ player.clubs_history | join(" → ") }}
+            </strong>
+
+        </div>
+
+        <div class="info-box">
+
+            <span class="info-label">
+                Biggest Transfer Fee
+            </span>
+
+            <strong>
+                £{{ player.biggest_transfer_fee }}m
+            </strong>
+
+        </div>
+
+        <div class="menu-buttons">
+
+            <a
+                class="menu-button primary"
+                href="{{ url_for('career_page') }}"
+            >
+                Return to Career Hub
+            </a>
+
+        </div>
+
+    </main>
+<footer class="site-footer">
+    <p>
+        Join the PRO LIFE community
+    </p>
+
+    <a
+        class="discord-link"
+        href="https://discord.gg/knrfNj7t9c"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Join our Discord
+    </a>
+</footer>
+</body>
+
+</html>

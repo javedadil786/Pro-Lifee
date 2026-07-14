@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PRO LIFE</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <main class="menu-card comic-panel">
+
+        <div class="comic-kicker">
+            Football Career Simulator
+        </div>
+
+        <h1 class="game-title">
+            PRO LIFE
+        </h1>
+
+        <p class="subtitle">
+            Start in the academy. Earn your place.
+            Win trophies and become a football legend.
+        </p>
+
+        <div class="menu-buttons">
+
+            <a
+                class="menu-button primary comic-burst"
+                href="{{ url_for('create_player_page') }}"
+            >
+                Start New Career
+            </a>
+
+        </div>
+
+        {% if careers %}
+
+            <section class="saved-careers-panel">
+
+                <h2>
+                    Continue Your Career
+                </h2>
+
+                <div class="save-list">
+
+                    {% for career in careers %}
+
+                        <article class="save-card">
+
+                            <div class="save-card-header">
+
+                                <div>
+
+                                    <span class="info-label">
+                                        {{ career.position }}
+                                    </span>
+
+                                    <h3>
+                                        {{ career.name }}
+                                    </h3>
+
+                                </div>
+
+                                <div class="save-overall">
+                                    {{ career.overall }}
+                                </div>
+
+                            </div>
+
+                            <div class="save-details">
+
+                                <p>
+                                    <strong>Club</strong>
+                                    {{ career.club }}
+                                </p>
+
+                                <p>
+                                    <strong>Age</strong>
+                                    {{ career.age }}
+                                </p>
+
+                                <p>
+                                    <strong>Season</strong>
+                                    {{ career.season }}
+                                </p>
+
+                                {% if career.retired %}
+
+                                    <p>
+                                        <strong>Status</strong>
+                                        Retired
+                                    </p>
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="save-actions">
+
+                                <form
+                                    action="{{ url_for('load_saved_career', save_id=career.save_id) }}"
+                                    method="POST"
+                                >
+
+                                    <button
+                                        class="menu-button primary"
+                                        type="submit"
+                                    >
+                                        Continue
+                                    </button>
+
+                                </form>
+
+                                <form
+                                    action="{{ url_for('delete_saved_career', save_id=career.save_id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Delete this career permanently?');"
+                                >
+
+                                    <button
+                                        class="menu-button danger-button"
+                                        type="submit"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+        {% else %}
+
+            <section class="saved-careers-panel empty-save-message">
+
+                <h2>
+                    No Careers Yet
+                </h2>
+
+                <div class="empty-save-content">
+
+                    <div class="football-icon">
+                        ⚽
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Your Journey Starts Here
+                        </strong>
+
+                        <p>
+                            Create your first professional football career.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        {% endif %}
+
+    </main>
+<footer class="site-footer">
+    <p>
+        Join the PRO LIFE community
+    </p>
+
+    <a
+        class="discord-link"
+        href="https://discord.gg/knrfNj7t9c"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Join our Discord
+    </a>
+</footer>
+</body>
+
+</html>
